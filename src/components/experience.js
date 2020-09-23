@@ -1,24 +1,26 @@
 import React from "react";
 import styled from "styled-components";
 
+const TextContainer = styled.div`
+  width: 100%;
+  max-width: 1140px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 100px;
+`;
+
+// IE11 requires -ms prefix to grid attributes
 const WorkTable = styled.div`
   display: -ms-grid;
   display: grid;
-  grid-auto-columns: 1fr;
-  -ms-grid-columns: 1fr 1fr;
-  -ms-grid-rows: auto auto;
-  grid-row-gap: 16px;
-  grid-column-gap: 16px;
-
   margin-bottom: 140px;
   grid-column-gap: 30px;
   grid-row-gap: 30px;
   grid-template-areas: ". . . .";
   -ms-grid-columns: 1fr 30px 1fr 30px 1fr 30px 1fr;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
   -ms-grid-rows: auto;
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
-}
 `
 
 const WorkCell = styled.div`
@@ -43,11 +45,10 @@ const PositionTime = styled.div`
   margin-bottom: 10px;
   line-height: 20px;
   font-size: 12px;
-  vertical-align: text-bottom;
 `
 
 const Experience = () => (
-  <div>
+  <TextContainer>
     <h2>My experience</h2>
     <p>
       I spent eight years in the Air Force as an Operations Research Analyst. 
@@ -57,7 +58,7 @@ const Experience = () => (
     <WorkTable>
       <WorkCell>
         <OrgName>MIT Lincoln Laboratory</OrgName>
-        <PositionTitle>Military Fellow</PositionTitle><br />
+        <PositionTitle>Military Fellow</PositionTitle>
         <PositionTime>July 2012 - June 2014</PositionTime>
       </WorkCell>
       <WorkCell>
@@ -72,11 +73,11 @@ const Experience = () => (
       </WorkCell>
       <WorkCell>
         <OrgName>Self-employed</OrgName>
-        <PositionTitle>Consultant</PositionTitle><br />
+        <PositionTitle>Consultant</PositionTitle>
         <PositionTime>July 2020 - present</PositionTime>
       </WorkCell>
     </WorkTable>
-  </div>
+  </TextContainer>
 );
 
 export default Experience;

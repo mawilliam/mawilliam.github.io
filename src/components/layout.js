@@ -1,15 +1,20 @@
 import React from "react";
 import Header from "./header";
 import Footer from "./footer";
-//import "./layout.css";
+import styled from "styled-components";
+
+const Section = styled.div`
+  margin-left: 30px;
+  margin-right: 30px;
+`;
 
 const Layout = ({ children }) => {
   return (
-    <div style={{ margin: `3rem auto`, maxWidth: 1050, padding: `0 1rem` }}>
+    <Section>
       <Header />
       {children}
       <Footer />
-    </div>
+    </Section>
   )
 };
 

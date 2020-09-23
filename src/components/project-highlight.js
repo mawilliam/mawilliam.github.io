@@ -1,13 +1,13 @@
 import React from "react";
-import Layout from "../components/layout";
-import Blackjack from "./projects/blackjack";
 import styled from "styled-components";
+import Blackjack from "../pages/projects/blackjack";
 
 const TextContainer = styled.div`
   width: 100%;
   max-width: 1140px;
   margin-right: auto;
   margin-left: auto;
+  margin-bottom: 100px;
 `;
 
 const ProjectTable = styled.div`
@@ -21,19 +21,18 @@ const ProjectTable = styled.div`
   -ms-grid-rows: auto;
   grid-template-columns: 3fr 1fr;
   grid-template-rows: auto;
-`
+`;
 
-const Projects = () => {
-  return (
-    <Layout>
-      <TextContainer>
-        <ProjectTable>
-          <Blackjack type="text" />
-          <Blackjack type="image" />
-        </ProjectTable>
-      </TextContainer>
-    </Layout>
-  )
-}
+const Highlight = () => (
+  <div>
+    <h2>Selected Projects</h2>
+    <TextContainer>
+      <ProjectTable>
+        <Blackjack type="text" />
+        <Blackjack type="image" />
+      </ProjectTable>
+    </TextContainer>
+  </div>
+);
 
-export default Projects;
+export default Highlight;

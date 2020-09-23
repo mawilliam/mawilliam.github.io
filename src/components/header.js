@@ -1,11 +1,57 @@
 import React from "react";
 import { Link, useStaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
+import styled from "styled-components";
+
+const ListItem = styled.li`
+  display: inline-block;
+  margin-right: 1rem;
+`;
+
+const StyledLink = styled(props => <Link {...props} />)`
+  color: black;
+  opacity: 0.6;
+  text-shadow: none;
+  background-image: none;
+  text-decoration: underline;
+  line-height: 46px;
+  height: 46px;
+  &:hover {
+    opacity: 0.8
+  }
+`;
+
+const LogoLink = styled(props => <Link {...props} />)`
+  z-index: 1;
+  color: black;
+  display: in-line;
+  font-size: 30px;
+  line-height: 46px;
+  font-weight: 400;
+  font-variant: small-caps;
+  text-decoration: underline;
+  background-image: none;
+`;
+
+const StyledURL = styled.a`
+text-shadow: none;
+background-image: none;
+opacity: 0.6;
+&:hover {
+  opacity: 0.8
+}
+`;
+
 
 const ListLink = (props) => (
-  <li style={{ display: `inline-block`, marginRight: `1rem` }}>
-    <Link to={props.to} style={{ color: `black`, textShadow: `none`, backgroundImage: `none` }}>{props.children}</Link>
-  </li>
+  <ListItem>
+    <StyledLink 
+      to={props.to}
+      activeStyle={{ opacity: 1, textDecoration: `none` }}
+    >
+      {props.children}
+    </StyledLink>
+  </ListItem>
 );
 
 const ImgLink = (props) => {
@@ -32,41 +78,41 @@ const ImgLink = (props) => {
   switch (props.name) {
     case "GitHub":
       return (
-        <li style={{ display: `inline-block`, marginRight: `1rem`}}>
-          <a href="https://github.com/mawilliam" style={{ textShadow: `none`, backgroundImage: `none` }}>
+        <ListItem>
+          <StyledURL href="https://github.com/mawilliam" >
             <Img 
               fixed={data.gitHub.childImageSharp.fixed}
               alt="GitHub Logo linking to personal profile"
             />
-          </a>
-        
-        </li>
+          </StyledURL>
+        </ListItem>
       )
     case "LinkedIn":
       return (
-        <li style={{ display: `inline-block`, marginRight: `1rem`}}>
-          <a href="http://linkedin.com/in/markwllms" style={{ textShadow: `none`, backgroundImage: `none` }}>
+        <ListItem>
+          <StyledURL href="http://linkedin.com/in/markwllms" >
             <Img 
               fixed={data.linkedIn.childImageSharp.fixed}
               alt="LinkedIn Logo linking to personal profile"
             />
-          </a>
-        
-        </li>
+          </StyledURL>
+        </ListItem>
       )
     default:
         return <Img />
   }
 };
+
 const Header = () => {
   return (
-    <header style={{ marginBottom: `1.5 rem` }}>
-      <Link to="/" style={{ textShadow: `none`, backgroundImage: `none` }}>
-        <h3 style={{ display: `inline`, fontVariant: `small-caps`, textDecoration: `underline` }}>mark</h3>
-      </Link>
+    <header style={{ padding: `30px 50px`, alignItems: `center` }}>
+      <LogoLink to="/" >
+        mark
+      </LogoLink>
       <ul style={{ listStyle: `none`, float: `right` }}>
-        <ListLink to="/about/">About</ListLink>
-        <ListLink to="/projects/">Projects</ListLink>
+        <ListLink to="/">Home</ListLink>
+        <ListLink to="/about">About</ListLink>
+        <ListLink to="/projects">Projects</ListLink>
         <ImgLink name="GitHub" />
         <ImgLink name="LinkedIn" />
       </ul>
