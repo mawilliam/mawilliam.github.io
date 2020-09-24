@@ -17,6 +17,9 @@ module.exports = {
       options: {
         path: `${__dirname}/src/assets`,
       }
-    }
+    },
+    {
+      resolve: `gatsby-plugin-styled-components`,
+    },
   ],
 }

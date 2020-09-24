@@ -1,9 +1,9 @@
 import React from "react";
 import { Link, useStaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
-import styled from "styled-components";
 import PropTypes from "prop-types";
 import Layout from "../../components/layout";
+import styled from "styled-components";
 
 const TextContainer = styled.div`
   width: 100%;
@@ -61,22 +61,19 @@ const LinkStyle = styled(props => <Link {...props} />)`
 const Highlight = () => (
   <div>
     <ProjectTitle>
-      Blackjack
+      Baby Names
     </ProjectTitle>
     <ProjectDescription>
-      For the final project of my Introduction to Programming for Analysts 
-      course this past spring, I held a friendly competition to develop a 'bot' 
-      to implement the most effective blackjack strategy. As part of the project,
-      I developed a work flow to automatically fetch new student submissions, 
-      simulate their bot against the dealer, and update a PowerBI leaderboard
-      with average hand win/loss percentage and average return on wager.
+      I am learning D3 and visualization in JavaScript so that I do not need to rely on viewers to have
+      any software besides a modern web browser. This project is using the Baby Names data set to learn
+      D3 and Observable.
     </ProjectDescription>
     <ProjectTags>
-      <ProjectTag>Python </ProjectTag>
-      <ProjectTag>Simulation </ProjectTag>
-      <ProjectTag>Monte Carlo</ProjectTag>
+      <ProjectTag>D3 </ProjectTag>
+      <ProjectTag>Plotly </ProjectTag>
+      <ProjectTag>Visualization</ProjectTag>
     </ProjectTags>
-    <LinkStyle to="/projects/blackjack/" >
+    <LinkStyle to="/projects/d3exploration/" >
       View project&gt;
     </LinkStyle>
   </div>
@@ -85,7 +82,7 @@ const Highlight = () => (
 const HighlightImg = () => {
   const imageData = useStaticQuery(graphql`
     query {
-      blackjack: file(relativePath: {eq: "BlackJack.jpg"}) {
+      baby: file(relativePath: {eq: "D3Explore.png"}) {
         childImageSharp {
           fluid {
             ...GatsbyImageSharpFluid
@@ -98,40 +95,58 @@ const HighlightImg = () => {
   return (
     <div >
       <Img 
-        fluid={imageData.blackjack.childImageSharp.fluid}
-        alt="Image of the Ace of clubs and the 10 of diamonds"
+        fluid={imageData.baby.childImageSharp.fluid}
+        alt="Image of a line chart showing the popularity of the name 'Mark' in the U.S. over time"
       />
     </div>
   )
 }
 
 const Project = () => {
+
   return (
     <Layout>
       <TextContainer>
-        Test
+        <h2>Interactive Chart made in Observable</h2>
+        <p>
+          I am learning D3 and visualization in JavaScript so that I do not need to rely on viewers to have
+          Python or any other software besides a modern web browser. Observable is a really useful tool to
+          create data visualizations and to be able to embed all or part of an Observable notebook in your
+          own web page.
+        </p>
+        <p>
+          Below is an interactive chart I made using data the Baby Names data that the Social Security
+          Administration publishes each year. It contains the number of babies with a given name for each
+          gender in a calendar year. There is data all the way back to 1880. There are nearly 2 million rows
+          in the data set. Try exploring the naming trends by typing different names in the box below. 
+          Enjoy!
+        </p>
       </TextContainer>
     </Layout>
   )
 };
 
-const Blackjack = ( {type} ) => {
+const D3Exploration = ( {type} ) => {
   switch (type) {
     case "text":
+      console.log('here')
+      console.log(type)
       return (<Highlight />)
     case "image":
+      console.log('here image')
+      console.log(type)
       return (<HighlightImg />)
     default:
       return (<Project />)
   }
 };
 
-Blackjack.propTypes = {
+D3Exploration.propTypes = {
   type: PropTypes.oneOf(['project', 'text', 'image'])
 };
 
-Blackjack.defaultProps = {
+D3Exploration.defaultProps = {
   type: 'project'
 };
 
-export default Blackjack;
+export default D3Exploration;

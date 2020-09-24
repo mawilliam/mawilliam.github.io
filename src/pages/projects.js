@@ -1,7 +1,9 @@
 import React from "react";
+import styled from "styled-components";
 import Layout from "../components/layout";
 import Blackjack from "./projects/blackjack";
-import styled from "styled-components";
+import D3Exploration from "./projects/d3exploration";
+
 
 const TextContainer = styled.div`
   width: 100%;
@@ -30,6 +32,8 @@ const Projects = () => {
         <ProjectTable>
           <Blackjack type="text" />
           <Blackjack type="image" />
+          <D3Exploration type="text" />
+          <D3Exploration type="image" />
         </ProjectTable>
       </TextContainer>
     </Layout>
