@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import {Runtime, Inspector} from "@observablehq/runtime";
+import notebook from "@mawilliam/baby-names";
+//import { Helmet } from "react-helmet";
 import { Link, useStaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
 import PropTypes from "prop-types";
@@ -103,6 +106,24 @@ const HighlightImg = () => {
 }
 
 const Project = () => {
+  //const [name, setName] = useState('');
+  const chartRef = useRef();
+  const nameRef = useRef();
+
+  useEffect(() => {
+    const runtime = new Runtime();
+    runtime.module(notebook, cellName => {
+      if (cellName === "viewof name") {
+        //return {fulfilled: (value) => {
+          //nameRef.current = value;
+        //}};
+        return new Inspector(nameRef.current)
+      }
+      if (cellName === "name_chart") {
+        return new Inspector(chartRef.current)
+      }
+    })
+  }, []); // only do this on initial load
 
   return (
     <Layout>
@@ -120,6 +141,13 @@ const Project = () => {
           gender in a calendar year. There is data all the way back to 1880. There are nearly 2 million rows
           in the data set. Try exploring the naming trends by typing different names in the box below. 
           Enjoy!
+        </p>
+        <div className="observablehq">
+          <div ref={nameRef}></div>
+          <div ref={chartRef}></div>
+        </div>
+        <p>
+          Feel free to check out more from my <a href="https://observablehq.com/@mawilliam/baby-names">Observable Notebook</a>.
         </p>
       </TextContainer>
     </Layout>

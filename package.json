@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/mawilliam/mawilliam.github.io#readme",
   "dependencies": {
+    "@mawilliam/baby-names": "file:../../Downloads/baby-names.tgz",
     "@observablehq/runtime": "github:observablehq/runtime",
     "babel-plugin-styled-components": "^1.11.1",
     "gatsby": "^2.24.63",
@@ -29,6 +30,7 @@
     "gatsby-transformer-sharp": "^2.5.15",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-helmet": "^6.1.0",
     "react-script-tag": "^1.1.2",
     "react-typography": "^0.16.19",
     "styled-components": "^5.2.0",
