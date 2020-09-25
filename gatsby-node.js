@@ -6,13 +6,14 @@ exports.onPreInit = () => {
   if (process.argv[2] === "build") {
     fs.rmdirSync(path.join(__dirname, dest), { recursive: true })
     fs.rmdirSync(path.join(__dirname, "public_dev"), { recursive: true })
-    fs.renameSync(
-      path.join(__dirname, "public"),
-      path.join(__dirname, "public_dev")
-    )
+    if (fs.existsSync(path.join(__dirname, "public"))) {
+      fs.renameSync(
+        path.join(__dirname, "public"),
+        path.join(__dirname, "public_dev")
+      )
+    }
   }
 }
-
 
 exports.onPostBuild = () => {
   
