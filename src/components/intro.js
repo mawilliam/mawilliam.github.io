@@ -30,7 +30,7 @@ const Intro = () => (
     <MotivationText>Hello. I'm a data and analytics professional from 
       upstate New York. I am learning about web programming to better 
       understand the entire solution pipeline and thought it would be 
-      fun to build a personal portfolio highlighting some personal projects.
+      fun to build a personal portfolio highlighting some of my projects.
     </MotivationText>
   </TextContainer>
 );

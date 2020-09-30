@@ -1,0 +1,136 @@
+import React from "react";
+import { useStaticQuery, graphql } from "gatsby";
+import styled from "styled-components";
+import PropTypes from "prop-types";
+import Layout from "../../components/layout";
+import Highlight from "../../components/project-highlight";
+
+const TextContainer = styled.div`
+  width: 100%;
+  max-width: 1140px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 100px;
+`;
+
+const ProjectTitle = styled.div`
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 64px;
+  line-height: 80px;
+  text-transform: none;
+`;
+
+const SectionTitle = styled.div`
+  margin-bottom: 10px;
+  font-size: 20px;
+  line-height: 34px;
+  font-weight: 400;
+  text-transform: none;
+`;
+
+const ProjectDescription = styled.p`
+  margin-bottom: 5px;
+  font-size: 16px;
+  line-height: 28px;
+  font-weigth: 400;
+  opacity: 0.8;
+`
+
+const ListItem = styled.li`
+  margin-bottom: 2px;
+`;
+
+const TwoColumnLeft = styled.div`
+  display: -ms-grid;
+  display: grid;
+  grid-column-gap: 20px;
+  grid-template-areas: ". .";
+  -ms-grid-columns: 2fr 20px 1fr;
+  grid-template-columns: 2fr 1fr;
+  margin-top: 50px;
+  margin-bottom: 50px;
+`;
+
+const TwoColumnRight = styled.div`
+  display: -ms-grid;
+  display: grid;
+  grid-column-gap: 20px;
+  grid-template-areas: ". .";
+  -ms-grid-columns: 1fr 20px 2fr;
+  grid-template-columns: 1fr 2fr;
+  margin-top: 50px;
+  margin-bottom: 50px;
+`;
+
+const TwoColumn = styled.div`
+  display: -ms-grid;
+  display: grid;
+  grid-column-gap: 20px;
+  grid-template-areas: ". .";
+  -ms-grid-columns: 1fr 20px 1fr;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 50px;
+  margin-bottom: 50px;
+`;
+
+const HighlightRow = () => {
+  const title = "#REPLACE";
+  const description = `
+    #REPLACE
+  `;
+  const link = "/projects/#REPLACE";
+  const tags = [#REPLACE];
+  const imageData = useStaticQuery(graphql`
+    query {
+      file: file(relativePath: {eq: "#REPLACE.ext"}) {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+    }
+  `);
+  const alt="#REPLACE";
+
+  return (
+    <Highlight
+      title={title}
+      description={description}
+      tags={tags}
+      link={link}
+      photo={imageData.file.childImageSharp.fluid}
+      alt={alt}
+    />
+  )
+}
+
+const Project = () => {
+  return (
+    <Layout>
+      <TextContainer>
+        Test
+      </TextContainer>
+    </Layout>
+  )
+};
+
+const ProjectExport = ( {type} ) => {
+  switch (type) {
+    case "highlight":
+      return (<HighlightRow />)
+    default:
+      return (<Project />)
+  }
+};
+
+ProjectExport.propTypes = {
+  type: PropTypes.oneOf(['project', 'highlight'])
+};
+
+ProjectExport.defaultProps = {
+  type: 'project'
+};
+
+export { ProjectExport };

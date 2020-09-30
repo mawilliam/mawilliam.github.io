@@ -1,12 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import {Runtime, Inspector} from "@observablehq/runtime";
 import notebook from "@mawilliam/baby-names";
-//import { Helmet } from "react-helmet";
-import { Link, useStaticQuery, graphql } from "gatsby";
-import Img from "gatsby-image";
+import { useStaticQuery, graphql } from "gatsby";
+import styled from "styled-components";
 import PropTypes from "prop-types";
 import Layout from "../../components/layout";
-import styled from "styled-components";
+import Highlight from "../../components/project-highlight";
 
 const TextContainer = styled.div`
   width: 100%;
@@ -16,76 +15,18 @@ const TextContainer = styled.div`
   margin-bottom: 100px;
 `;
 
-const ProjectTitle = styled.div`
-  margin-bottom: 10px;
-  font-size: 20px;
-  line-height: 34px;
-  font-weight: 600;
-  text-transform: none;
-`
-const ProjectTags = styled.ul`
-  list-style: none;
-  margin-bottom: 5px;
-`
-
-const ProjectTag = styled.li`
-  display: inline-block;
-  font-size: 12px;
-  line-height: 20px;
-  opacity: 0.7;
-  padding-right: 10px;
-  margin-bottom: 0px;
-`
-
-const ProjectDescription = styled.p`
-  margin-bottom: 5px;
-  font-size: 14px;
-  line-height: 26px;
-`
-
-const LinkStyle = styled(props => <Link {...props} />)`
-  display: block;
-  -webkit-transition: opacity 200ms ease;
-  transition: opacity 200ms ease;
-  color: #1a1b1f;
-  text-decoration: underline;
-  margin-bottom: 10px;
-  font-size: 12px;
-  line-height: 20px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  background-image: none;
-  &:hover {
-    opacity: 0.8
-  };
-`
-
-const Highlight = () => (
-  <div>
-    <ProjectTitle>
-      Baby Names
-    </ProjectTitle>
-    <ProjectDescription>
-      I am learning D3 and visualization in JavaScript so that I do not need to rely on viewers to have
-      any software besides a modern web browser. This project is using the Baby Names data set to learn
-      D3 and Observable.
-    </ProjectDescription>
-    <ProjectTags>
-      <ProjectTag>D3 </ProjectTag>
-      <ProjectTag>Plotly </ProjectTag>
-      <ProjectTag>Visualization</ProjectTag>
-    </ProjectTags>
-    <LinkStyle to="/projects/d3exploration/" >
-      View project&gt;
-    </LinkStyle>
-  </div>
-);
-
-const HighlightImg = () => {
+const HighlightRow = () => {
+  const title = "Baby Names";
+  const description = `
+    I am learning D3 and visualization in JavaScript so that I do not need to rely on viewers to have
+    any software besides a modern web browser. This project is using the Baby Names data set to learn
+    D3 and Observable.
+  `;
+  const link = "/projects/d3exploration";
+  const tags = ["JavaScript", "D3", "Plotly", "Observable", "Visualization"];
   const imageData = useStaticQuery(graphql`
     query {
-      baby: file(relativePath: {eq: "D3Explore.png"}) {
+      file: file(relativePath: {eq: "D3Explore.png"}) {
         childImageSharp {
           fluid {
             ...GatsbyImageSharpFluid
@@ -93,20 +34,22 @@ const HighlightImg = () => {
         }
       }
     }
-  `)
+  `);
+  const alt="Image of a line chart showing the popularity of the name 'Mark' in the U.S. over time";
 
   return (
-    <div >
-      <Img 
-        fluid={imageData.baby.childImageSharp.fluid}
-        alt="Image of a line chart showing the popularity of the name 'Mark' in the U.S. over time"
-      />
-    </div>
+    <Highlight
+      title={title}
+      description={description}
+      tags={tags}
+      link={link}
+      photo={imageData.file.childImageSharp.fluid}
+      alt={alt}
+    />
   )
 }
 
 const Project = () => {
-  //const [name, setName] = useState('');
   const chartRef = useRef();
   const nameRef = useRef();
 
@@ -114,9 +57,6 @@ const Project = () => {
     const runtime = new Runtime();
     runtime.module(notebook, cellName => {
       if (cellName === "viewof name") {
-        //return {fulfilled: (value) => {
-          //nameRef.current = value;
-        //}};
         return new Inspector(nameRef.current)
       }
       if (cellName === "name_chart") {
@@ -154,27 +94,21 @@ const Project = () => {
   )
 };
 
-const D3Exploration = ( {type} ) => {
+const ProjectExport = ( {type} ) => {
   switch (type) {
-    case "text":
-      console.log('here')
-      console.log(type)
-      return (<Highlight />)
-    case "image":
-      console.log('here image')
-      console.log(type)
-      return (<HighlightImg />)
+    case "highlight":
+      return (<HighlightRow />)
     default:
       return (<Project />)
   }
 };
 
-D3Exploration.propTypes = {
-  type: PropTypes.oneOf(['project', 'text', 'image'])
+ProjectExport.propTypes = {
+  type: PropTypes.oneOf(['project', 'highlight'])
 };
 
-D3Exploration.defaultProps = {
+ProjectExport.defaultProps = {
   type: 'project'
 };
 
-export default D3Exploration;
+export default ProjectExport;
