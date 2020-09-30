@@ -18,8 +18,10 @@ exports.onPreInit = () => {
 exports.onPostBuild = () => {
   
   fs.renameSync(path.join(__dirname, "public"), path.join(__dirname, dest))
-  fs.renameSync(
-    path.join(__dirname, "public_dev"),
-    path.join(__dirname, "public")
-  )
+  if (fs.existsSync(path.join(__dirname, "public_dev"))) {
+    fs.renameSync(
+      path.join(__dirname, "public_dev"),
+      path.join(__dirname, "public")
+    )
+  }
 }
