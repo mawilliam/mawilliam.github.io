@@ -39,6 +39,13 @@ const ProjectDescription = styled.p`
   opacity: 0.8;
 `
 
+const FigCaption = styled.figcaption`
+  font-size: 14px;
+  line-height: 22px;
+  font-weigth: 400;
+  opacity: 0.8;
+`;
+
 const ListItem = styled.li`
   margin-bottom: 2px;
 `;
@@ -88,7 +95,7 @@ const Image = ({ photo }) => {
       }
       distribution: file(relativePath: {eq: "usafa/USAFANextDistribution.png"}) {
         childImageSharp {
-          fixed (width: 500) {
+          fixed (width: 700) {
             ...GatsbyImageSharpFixed
           }
         }
@@ -173,8 +180,9 @@ const Project = () => {
               The U.S. Air Force Academy (USAFA) Superintendent (president at a typical university) had 
               been exploring alternative scheduling paradigms. Since USAFA has many more graduation 
               requirements and an entirely different business model than most other universities, 
-              scheduling courses is based on student demand rather than set by course
-              supply. This makes scheduling courses much more challenging.
+              scheduling courses is driven by student demand rather than by course supply. That inverse
+              relationship and unique requirements makes scheduling courses much more challenging. 
+              Furthermore, it means that typical commercial solutions would not work off the shelf.
             </ProjectDescription>
           </div>
           <div>
@@ -186,11 +194,22 @@ const Project = () => {
               My role was to develop a prototype that scheduled student course requests from a prior 
               academic year subject to all of the practical constraints. Furthermore, I developed a 
               Microsoft Power BI dashboard to share the results with the many stakeholders across 
-              campus so they could explore and gain confidence in the solution.
+              campus so they could explore and gain confidence in the solution. This enabled stakeholders
+              to identify conflicts for students and tailor their course offering preferences to alleviate
+              those conflicts.
             </ProjectDescription>
           </div>
         </TwoColumn>
-        <Image photo="summary" />
+        <figure style={{marginTop: `50px`, marginBottom: `50px`}}>
+          <Image photo="summary" />
+          <FigCaption>
+            The image above displays the home screen of the Power BI dashboard in the Microsoft
+            Team. Since our organization used Office 365, everyone could access the dashboard in 
+            Microsoft Teams or SharePoint. This was very powerful as it exposed much of the data 
+            to the stakeholders which helped them understand it better and provide feedback to improve
+            the solution. 
+          </FigCaption>
+        </figure>
         <TwoColumn>
           <div>
             <SectionTitle>
@@ -219,14 +238,34 @@ const Project = () => {
               </ul>
             </ProjectDescription>
           </div>
-          <Image photo="dist" />
+          <figure>
+            <Image photo="dist" />
+            <FigCaption>
+              The above image is one example of the dashboards provided to all stakeholders. The motivation
+              for this particular dashboard is to show the impact on students' course load. The typical 
+              student takes 12 academic courses per year so it makes sense that the majority of students
+              have at most four courses in a trimester. There are a few students that are scheduled for 
+              six academic courses in a single trimester which is concerning so we would be able to dig
+              into whether that is a problem.
+            </FigCaption>
+          </figure>
           
         </TwoColumn>
         <TwoColumnLeft>
-          <img
-            src={unscheduledGIF}
-            alt="Animation exploring unscheduled course requests and drilling through to a single student to see their schedule and conflicts"
-          />
+          <figure>
+            <img
+              src={unscheduledGIF}
+              alt="Animation exploring unscheduled course requests and drilling through to a single student to see their schedule and conflicts"
+            />
+            <FigCaption>
+              The above animation
+              explores unscheduled course requests by first clicking on a particular major which causes
+              the other visuals on the page to update. Next, it drills through on an individual student
+              which brings up a new page showing that particular student's schedule. Finally, you are
+              able to explore the schedule conflicts for that student which provides administrators
+              insight into potential solutions.
+            </FigCaption>
+          </figure>
           <div>
             <SectionTitle>
               Highlight
@@ -235,11 +274,9 @@ const Project = () => {
               While I did not have time to incorporate a heuristic to improve the greedy solution, I am
               most proud of the Power BI visualizations. I was able to generate new visualizations 
               quickly from stakeholder requests because my data model was so simple. It was also quite
-              useful as a sanity check on the output while adding new features. The animation on the left
-              explores unscheduled course requests by first clicking on a particular major which causes
-              the other visuals on the page to update. Next, it drills through on an individual student
-              which brings up a new page showing that particular student's schedule. Finally, you are
-              able to explore the schedule conflicts for that student.
+              useful as a sanity check of the output while adding new features as well as providing an 
+              avenue for feedback from users. This is something that was lacking from the current solution
+              and not possible from many of the commercial products under consideration.
             </ProjectDescription>
           </div>
         </TwoColumnLeft>
@@ -251,8 +288,8 @@ const Project = () => {
             <ProjectDescription>
               The decision to move to a new scheduling paradigm was delayed due to the COVID-19 pandemic
               and, unfortunately, I completed my assignment there in June. However, the Power BI 
-              dashboard is still live in the Team and my prototype is up to date in case the Superintendent
-              revisits the decision.
+              dashboard is still live in the Microsoft Team and my prototype is up to date in case the 
+              Superintendent revisits the decision.
             </ProjectDescription>
           </div>
           <div>
@@ -261,8 +298,8 @@ const Project = () => {
             </SectionTitle>
             <ProjectDescription>
               I learned an incredible amount working on this project. This was my largest software
-              development effort with several custom objects and thousands of lines of Python. However,
-              using PowerBI to create compelling visualizations was my biggest takeaway from the project.
+              development effort with nine custom objects and over one thousand of lines of Python. However,
+              using Power BI to create compelling visualizations was my biggest takeaway from the project.
               Since our organization was already using O365, it made sharing these visualizations easy.
               It also motivated me to learn JavaScript and D3 in order to always be sure that I could
               share compelling visualizations without relying on any special software.

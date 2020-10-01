@@ -76,7 +76,8 @@ const Project = () => {
           own web page.
         </p>
         <p>
-          Below is an interactive chart I made using data the Baby Names data that the Social Security
+          Below is an interactive chart I made using the Plotly library and the Baby Names data that the 
+          Social Security
           Administration publishes each year. It contains the number of babies with a given name for each
           gender in a calendar year. There is data all the way back to 1880. There are nearly 2 million rows
           in the data set. Try exploring the naming trends by typing different names in the box below. 
