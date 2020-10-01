@@ -6,6 +6,7 @@ exports.onPreInit = () => {
   if (process.argv[2] === "build") {
     fs.rmdirSync(path.join(__dirname, dest), { recursive: true })
     fs.rmdirSync(path.join(__dirname, "public_dev"), { recursive: true })
+    fs.rmdirSync(path.join(__dirname, ".cache"), { recursive: true })
     if (fs.existsSync(path.join(__dirname, "public"))) {
       fs.renameSync(
         path.join(__dirname, "public"),
